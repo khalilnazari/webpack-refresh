@@ -69,5 +69,129 @@ Asset directory contians all files our project utilize is like images, fonts and
 To include assest in the bundle, you need to add a rule for it in the webpack config file
 
 ```
+module: {
+    rules: [
+      {
+        test: /\.(png|jpg)$/,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(ttf)/,
+        type: "asset/resource",
+      },
+    ],
+  },
+```
 
+#### Add source map to dist
+
+devtool is used to add source map to dist
+devtool is used only for none production envs like dev/test
+
+`devtool: "inline-source-map",`
+
+#### Set up webpack DEV Server
+
+Things to consider
+
+- It runs in watch mode
+- Provides HTTP server which is good only for Frontend
+- It simulates the actualy production env but use only http instead of https
+- It will be only in Memory and does not produce build asset on disk
+
+To install webpack dev server install below:
+
+```
+npm install webpack-dev-server -D
+```
+
+Then add devServer key in the config file
+
+```
+devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    port: 3000,
+    compress: true,
+    open: true,
+  },
+```
+
+Then change the mode
+
+```
+mode: "development",
+```
+
+Finnaly, add script for it in package.json
+remove:
+
+```
+"dev": "webpack --watch"
+```
+
+add:
+
+```
+"dev": "webpack serve"
+```
+
+Note: add manually the index.html file into dist directory
+
+#### Adding multiple files
+
+```
+  entry: ["./src/index.js", "./src/main.js", "./src/app.js"],
+
+```
+
+## webpack cli
+
+To get help
+
+```
+npx webpack help
+```
+
+To get the detail of a specific flag. For example about watch flag
+
+```
+npx webpack help --watch
+```
+
+Webpack version
+
+```
+npx webpack version
+```
+
+or
+
+```
+npx webpack -v
+```
+
+Webpack configuration test
+
+```
+npx webpack configtest
+```
+
+To create webpack configuration file
+
+```
+npx webpack init
+```
+
+To lunch web developer server
+
+```
+npx webpack serve
+```
+
+To run webpack in watch mode
+
+```
+npx webpack --watch
 ```

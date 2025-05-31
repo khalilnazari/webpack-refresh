@@ -1,14 +1,13 @@
 const path = require("path");
 
 module.exports = {
-  // minimal configuration
-  entry: "./src/index.js",
+  entry: ["./src/index.js", "./src/main.js", "./src/app.js"],
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "dist/",
+    // publicPath: "dist/",
   },
-  mode: "none",
+  mode: "development",
   module: {
     rules: [
       {
@@ -20,5 +19,14 @@ module.exports = {
         type: "asset/resource",
       },
     ],
+  },
+  devtool: "inline-source-map",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    port: 3000,
+    compress: true,
+    open: true,
   },
 };
