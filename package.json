@@ -1,0 +1,24 @@
+{
+  "name": "webpack-course",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khalilnazari/webpack-refresh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khalilnazari/webpack-refresh/issues"
+  },
+  "homepage": "https://github.com/khalilnazari/webpack-refresh#readme",
+  "description": "",
+  "devDependencies": {
+    "webpack": "^5.99.9",
+    "webpack-cli": "^6.0.1"
+  }
+}
