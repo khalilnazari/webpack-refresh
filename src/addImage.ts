@@ -1,4 +1,4 @@
-function createElementWithImage(tagName, imageUrl, imageAlt = "") {
+function createElementWithImage(tagName:string, imageUrl:string, imageAlt:string = "") {
   const element = document.createElement(tagName);
   const img = document.createElement("img");
   img.src = imageUrl;
@@ -9,10 +9,10 @@ function createElementWithImage(tagName, imageUrl, imageAlt = "") {
   return element;
 }
 
-function addImage(container, imagePath, alt) {
+function addImage(container:string, imagePath:string, alt:string) {
   const imgContainer = document.getElementById(container);
   const imageElement = createElementWithImage("div", imagePath, alt);
-  imgContainer.appendChild(imageElement);
+  imgContainer?.appendChild(imageElement);
 }
 
 export default addImage;

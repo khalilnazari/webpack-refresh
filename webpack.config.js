@@ -3,9 +3,13 @@ const path = require("path");
 const productionMode = process.env.NODE_ENV === "production";
 
 const config = {
-  entry: ["./src/index.js", "./src/main.js", "./src/app.js"],
+  entry: {
+    index: "./src/index",
+    main: "./src/main",
+    app: "./src/app",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
     // publicPath: "dist/",
   },
@@ -16,24 +20,24 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
+        use: "ts-loader",
       },
       {
         test: /\.(png|jpg)$/,
-        type: "asset/resource",
+        // type: "asset/resource",
+        use: "ts-loader",
       },
       {
         test: /\.(ttf)/,
-        type: "asset/resource",
+        // type: "asset/resource",
+        use: "ts-loader",
       },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   devtool: "inline-source-map",
   devServer: {
