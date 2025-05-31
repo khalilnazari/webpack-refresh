@@ -1,4 +1,6 @@
 import helloWorld from "./hello-world";
-import './hello-webpack'
+import addImage from "./addImage";
+import myImage from "./image.png";
 
-helloWorld(); 
+addImage("image-container", myImage, "simple image");
+helloWorld();
