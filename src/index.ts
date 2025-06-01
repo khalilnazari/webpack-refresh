@@ -2,8 +2,8 @@ import helloWorld from "./hello-world";
 import addImage from "./addImage";
 // import myImage from "./image.png";
 
-// import "./css/style.css"
-import "./css/style.scss"
+import "./css/style.css"
+// import "./css/style.scss"
 
 
 console.log("Runing addImage");

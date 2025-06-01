@@ -251,3 +251,60 @@ plugins: [
   new MiniCssExtractPlugin({filename:"mini.css"}),
 ],
 ```
+
+### Handle PostCSS and AutoPrefixer
+
+AutoPrefixer: is a tool to add browser-specific prefixes when some edge/new CSS rules not compatible with that browser.
+PostCSS: this is used by AutoPrefixer to handle CSS edge cases.
+
+Install postcss packages
+
+```
+npm install -D postcss postcss-loader postcss-preset-env
+```
+
+Update css rule inside the config
+
+```
+{
+  test: /\.css$/i,
+  use: [
+    "style-loader",
+    "css-loader",
+    {
+      loader: "postcss-loader",
+      options: {
+        postcssOptions: {
+          plugins: [
+            [
+              "postcss-preset-env",
+              {
+                // Options
+              },
+            ],
+          ],
+        },
+      },
+    },
+  ],
+}
+```
+
+This doesn't work with SCSS files and it should be CSS files.
+
+- Note: Another way to add postCSS plugin and rule is to create a new file `postcss.config.js` and add the following:
+
+```
+module.exports = {
+  plugins: [
+    [
+      "postcss-preset-env",
+      {
+        // Options
+      },
+    ],
+  ],
+};
+```
+
+For more visit : https://webpack.js.org/loaders/postcss-loader/
