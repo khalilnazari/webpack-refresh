@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=production webpack serve",
-    "start": "webpack"
+    "build": "webpack",
+    "dev": "npm run build && webpack serve",
+    "start": "NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,9 @@
     "@babel/core": "^7.27.4",
     "@babel/preset-env": "^7.27.2",
     "babel-loader": "^10.0.0",
+    "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
+    "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.5.4",

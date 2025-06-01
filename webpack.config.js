@@ -1,21 +1,15 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const productionMode = process.env.NODE_ENV === "production";
 
 const config = {
-  // entry: {
-  //   index: "./src/index",
-  //   main: "./src/main",
-  //   app: "./src/app",
-  // },
   entry: ["./src/index", "./src/main", "./src/app"],
   output: {
-    // filename: "[name].js",
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    // publicPath: "dist/",
     clean: true,
   },
   mode: "development",
@@ -30,36 +24,24 @@ const config = {
         use: "ts-loader",
       },
       {
+        test: /\.html$/,
+        use: "html-loader",
+      },
+      {
         test: /\.css$/i,
-        use: [
-          "style-loader",
-          "css-loader",
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    "postcss-preset-env",
-                    {
-                      // Options
-                    },
-                  ],
-                ],
-              },
-            },
-          },
-        ],
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpg)$/,
-        // type: "asset/resource",
-        use: "ts-loader",
+        test: /\.txt$/,
+        type: "asset/source",
       },
+      // rule when image is used inside js file
       {
-        test: /\.(ttf)/,
-        // type: "asset/resource",
-        use: "ts-loader",
+        test: /\.(png|jpeg|jpg|svg|gif)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[hash][name][ext]",
+        },
       },
     ],
   },
@@ -74,11 +56,15 @@ const config = {
     watchFiles: ["src/**/*", "index.html"],
     port: 3000,
     compress: true,
-    open: false, // I don't want to open new table everytime I run ;)
+    open: false,
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "./index.html" }),
     new MiniCssExtractPlugin(),
+    // when image is used inside html file
+    new CopyPlugin({
+      patterns: [{ from: "./src/images", to: "images" }],
+    }),
   ],
 };
 

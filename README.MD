@@ -146,7 +146,87 @@ Note: add manually the index.html file into dist directory
 
 ```
 
-## webpack cli
+# Add Images and other assets
+
+install below packages/plugin
+`npm i -D copy-webpack-plugin`
+
+Ues the plugin
+
+```
+new CopyPlugin({
+  patterns: [{ from: "./src/images", to: "images" }],
+}),
+```
+
+## To handle raw files just create the rules
+
+For example: create a txt file and use it in js file
+To add it to the bundle create a rule:
+
+```
+{
+  test: /\.txt$/,
+  type: "asset/source",
+},
+```
+
+## To add assets files used in JS files
+
+Without using copy plugin we can create a rule liks this :
+
+```
+{
+  test: /\.(png|jpeg|jpg|svg|gif)$/i,
+  type: "asset/resource",
+  generator: {
+    filename: "images/[name][ext]",
+  },
+},
+```
+
+## Parsing HTML in build
+
+install html-loader
+
+```
+npm install html-loader -D
+```
+
+We use html-loader rule
+
+```
+{
+  test: /\.html$/,
+  use: "html-loader",
+},
+```
+
+And add hash to image name like this
+
+```
+
+```
+
+## Inlining images
+
+By inlining images, wepack doesn't create image folder in build instead it will inline the image.
+Below is the rule.
+
+```
+{
+  test: /\.(png|jpeg|jpg|svg|gif)$/i,
+  type: "asset/inline",
+},
+```
+
+Depeding on the scenario/performance/project you can use any of the above.
+
+## Handling image inisde CSS file
+
+For example background images. It works as the above rule.
+
+# webpack cli
 
 To get help
 
